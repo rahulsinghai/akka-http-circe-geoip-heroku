@@ -13,8 +13,8 @@ cache:
     - $HOME/.sbt/boot
 
 script:
-  # uncomment this line if your project needs to run something other than sbt ++$TRAVIS_SCALA_VERSION test:
-  # - sbt ++$TRAVIS_SCALA_VERSION clean validateJVM
+  - sbt ++$TRAVIS_SCALA_VERSION test
+  # - sbt ++$TRAVIS_SCALA_VERSION clean validateJVM test
 
   # See http://www.scala-sbt.org/0.13/docs/Travis-CI-with-sbt.html
   # Tricks to avoid unnecessary cache updates
