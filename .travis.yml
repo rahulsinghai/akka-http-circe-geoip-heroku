@@ -13,12 +13,7 @@ cache:
     - $HOME/.sbt/boot
 
 script:
-  - if [[ "$TRAVIS_BRANCH" == "scalajs" ]];
-    then sbt ++$TRAVIS_SCALA_VERSION clean validateJS;
-    else
-      sbt ++$TRAVIS_SCALA_VERSION clean coverage validateJVM &&
-      sbt ++$TRAVIS_SCALA_VERSION coverageReport;
-    fi
+  - sbt ++$TRAVIS_SCALA_VERSION clean validateJVM
 
   # See http://www.scala-sbt.org/0.13/docs/Travis-CI-with-sbt.html
   # Tricks to avoid unnecessary cache updates
