@@ -1,6 +1,6 @@
-# Akka HTTP microservice example
+# Akka HTTP microservice based on Circe example
 
-[![Join the chat at https://gitter.im/theiterators/akka-http-microservice](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/theiterators/akka-http-microservice?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/singhaiuklimited/akka-http-circe-geoip-heroku](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/theiterators/akka-http-circe-geoip-heroku?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This project demonstrates the [Akka HTTP](http://doc.akka.io/docs/akka-stream-and-http-experimental/current/scala.html) library and Scala to write a simple REST (micro)service. The project shows the following tasks that are typical for most Akka HTTP-based projects:
 
@@ -74,6 +74,6 @@ $ sbt
 
 If you have any questions regarding this project contact:
 
-Łukasz Sowa <lukasz@theiterators.com> from [Iterators](http://www.theiterators.com).
+Rahul Singhai <singrahu@gmail.com> from [http://www.cse.iitb.ac.in/~rahuls_05](http://www.cse.iitb.ac.in/~rahuls_05).
 
 For licensing info see LICENSE file in project's root directory.

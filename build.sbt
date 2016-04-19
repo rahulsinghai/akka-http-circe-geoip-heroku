@@ -22,17 +22,12 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-actor"             % akkaV,
     "com.typesafe.akka" %% "akka-http-core"         % akkaV,
     "com.typesafe.akka" %% "akka-http-experimental" % akkaV,
-    "com.typesafe.akka" %% "akka-stream"            % akkaV,
-    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaV,
 
     "io.circe"          %% "circe-core"             % circeV,
     "io.circe"          %% "circe-generic"          % circeV,
     "io.circe"          %% "circe-parser"           % circeV,
 
-
-    "com.typesafe.akka" %% "akka-testkit"           % akkaV      % Test,
     "com.typesafe.akka" %% "akka-http-testkit"      % akkaV      % Test,
-
     "org.scalatest"     %% "scalatest"              % scalaTestV % Test
   )
 }

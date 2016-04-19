@@ -6,7 +6,6 @@ import akka.actor.ActorSystem
 import akka.event.LoggingAdapter
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.client.RequestBuilding
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
@@ -16,62 +15,14 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.Materializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.typesafe.config.Config
-import spray.json.DefaultJsonProtocol
+import models._
+import utils.CirceSupport._
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
-import scala.math._
 
-case class IpInfo(as: Option[String],
-                  city: Option[String],
-                  country: Option[String],
-                  countryCode: Option[String],
-                  isp: Option[String],
-                  lat: Option[Double],
-                  lon: Option[Double],
-                  mobile: Option[Boolean],
-                  org: Option[String],
-                  proxy: Option[Boolean],
-                  query: String,
-                  region: Option[String],
-                  regionName: Option[String],
-                  reverse: Option[String],
-                  status: String,
-                  timezone: Option[String],
-                  zip: Option[String]
-                 )
+import io.circe.generic.auto._
 
-case class IpPairSummaryRequest(ip1: String, ip2: String)
-
-case class IpPairSummary(distance: Option[Double], ip1Info: IpInfo, ip2Info: IpInfo)
-
-object IpPairSummary {
-  def apply(ip1Info: IpInfo, ip2Info: IpInfo): IpPairSummary = IpPairSummary(calculateDistance(ip1Info, ip2Info), ip1Info, ip2Info)
-
-  private def calculateDistance(ip1Info: IpInfo, ip2Info: IpInfo): Option[Double] = {
-    (ip1Info.lat, ip1Info.lon, ip2Info.lat, ip2Info.lon) match {
-      case (Some(lat1), Some(lon1), Some(lat2), Some(lon2)) =>
-        // see http://www.movable-type.co.uk/scripts/latlong.html
-        val φ1 = toRadians(lat1)
-        val φ2 = toRadians(lat2)
-        val Δφ = toRadians(lat2 - lat1)
-        val Δλ = toRadians(lon2 - lon1)
-        val a = pow(sin(Δφ / 2), 2) + cos(φ1) * cos(φ2) * pow(sin(Δλ / 2), 2)
-        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        Option(EarthRadius * c)
-      case _ => None
-    }
-  }
-
-  private val EarthRadius = 6371.0
-}
-
-trait Protocols extends DefaultJsonProtocol {
-  implicit val ipInfoFormat = jsonFormat17(IpInfo.apply)
-  implicit val ipPairSummaryRequestFormat = jsonFormat2(IpPairSummaryRequest.apply)
-  implicit val ipPairSummaryFormat = jsonFormat3(IpPairSummary.apply)
-}
-
-trait Service extends Protocols {
+trait Service {
   implicit val system: ActorSystem
 
   implicit def executor: ExecutionContextExecutor
@@ -79,6 +30,7 @@ trait Service extends Protocols {
   implicit val materializer: Materializer
 
   def config: Config
+
   val logger: LoggingAdapter
 
   lazy val freeGeoIpConnectionFlow: Flow[HttpRequest, HttpResponse, Any] =
