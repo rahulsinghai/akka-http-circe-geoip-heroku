@@ -5,7 +5,12 @@
 .cache
 .history
 .lib/
+libs/
+logs/
 dist/*
+
+project/project
+project/target/
 target/
 lib_managed/
 src_managed/
@@ -17,4 +22,25 @@ project/plugins/project/
 .worksheet
 
 # IntelliJ specific
-.idea
+*.iml
+*.ipr
+*.iws
+.idea/
+.idea_modules/
+
+.project
+
+# OS X
+Icon
+Thumbs.db
+.DS_Store
+
+# SASS
+*.sass-cache
+
+# Gradle
+build/
+.gradle/
+out/
+
+woas.spec
