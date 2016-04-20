@@ -1,4 +1,4 @@
-package models
+package com.singhaiuklimited.models
 
 import scala.math._
 

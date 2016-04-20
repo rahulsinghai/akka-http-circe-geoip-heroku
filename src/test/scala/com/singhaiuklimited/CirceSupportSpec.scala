@@ -1,40 +1,26 @@
+package com.singhaiuklimited
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.RequestEntity
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.ActorMaterializer
-import org.scalatest.{ BeforeAndAfterAll, Matchers, WordSpec }
+import com.singhaiuklimited.models._
+import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
+
 import scala.concurrent.Await
-import scala.concurrent.duration.{ Duration, DurationInt }
+import scala.concurrent.duration.{Duration, DurationInt}
 
 object CirceSupportSpec {
+
   case class Foo(bar: String)
 
-  case class IpInfo(as: Option[String],
-                    city: Option[String],
-                    country: Option[String],
-                    countryCode: Option[String],
-                    isp: Option[String],
-                    lat: Option[Double],
-                    lon: Option[Double],
-                    mobile: Option[Boolean],
-                    org: Option[String],
-                    proxy: Option[Boolean],
-                    query: String,
-                    region: Option[String],
-                    regionName: Option[String],
-                    reverse: Option[String],
-                    status: String,
-                    timezone: Option[String],
-                    zip: Option[String]
-                   )
-
-  case class IpPairSummary(distance: Option[Double], ip1Info: IpInfo, ip2Info: IpInfo)
 }
 
 class CirceSupportSpec extends WordSpec with Matchers with BeforeAndAfterAll {
-  import utils.CirceSupport._
+
   import CirceSupportSpec._
+  import com.singhaiuklimited.utils.CirceSupport._
 
   implicit val system = ActorSystem()
   implicit val mat = ActorMaterializer()

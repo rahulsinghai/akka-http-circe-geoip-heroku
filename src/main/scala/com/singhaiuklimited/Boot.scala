@@ -8,7 +8,7 @@ import akka.stream.ActorMaterializer
 import com.singhaiuklimited.routing.Service
 import com.typesafe.config.ConfigFactory
 
-import scala.io.StdIn
+//import scala.io.StdIn
 import scala.util.Try
 
 object Boot extends App with Service {
@@ -28,9 +28,12 @@ object Boot extends App with Service {
   private val httpPort: Int = Try(config.getInt("http.port")).getOrElse(80)
   private val bindingFuture = Http().bindAndHandle(handler = logRequestResult("log")(routes), interface = httpInterface, port = httpPort)
 
-  logger.info(s"Server online at http://$httpInterface:$httpPort/\nPress RETURN to stop...")
+  logger.info(s"Server online at http://$httpInterface:$httpPort/")
+  /* Commented out as readLine was causing crash in Heroku
+  logger.info("Press RETURN to stop...")
   StdIn.readLine() // let it run until user presses return
   bindingFuture
     .flatMap(_.unbind()) // trigger unbinding from the port
     .onComplete(_ => system.terminate()) // and shutdown when done
+  */
 }

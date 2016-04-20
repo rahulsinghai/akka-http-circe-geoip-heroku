@@ -15,8 +15,8 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.Materializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.typesafe.config.Config
-import models._
-import utils.CirceSupport._
+import com.singhaiuklimited.models._
+import com.singhaiuklimited.utils.CirceSupport._
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
 

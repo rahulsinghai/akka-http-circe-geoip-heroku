@@ -2,15 +2,13 @@ import akka.event.NoLogging
 import akka.http.scaladsl.model.ContentTypes._
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
-import akka.stream.scaladsl.Flow
-import com.singhaiuklimited.routing._
-import org.scalatest._
-import utils.CirceSupport._
-
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import akka.stream.scaladsl.Flow
+import com.singhaiuklimited.models._
+import com.singhaiuklimited.routing._
+import com.singhaiuklimited.utils.CirceSupport._
 import io.circe.generic.auto._
-import models.{IpInfo, IpPairSummary, IpPairSummaryRequest}
-import org.scalatest.Matchers
+import org.scalatest.{Matchers, _}
 
 class ServiceSpec extends FlatSpec with Matchers with ScalatestRouteTest with Service {
   override def testConfigSource = "akka.loglevel = WARNING"
