@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/akka-http-microservice -Dhttp.port=$PORT
+web: target/universal/stage/bin/akka-http-circe-geoip-heroku -Dhttp.port=$PORT
